@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { LetterBox } from './LetterBox';
 
-export const LetterMatrix = ({ matrix }) => {
+export const LetterMatrix = ({ matrix, onLetterSelected }) => {  
 
   return (
     <div className="mt-10 flex justify-center">
@@ -10,7 +10,15 @@ export const LetterMatrix = ({ matrix }) => {
         {
         matrix.map(        
           row => row.map(
-              ({ id, letter }) => (<LetterBox key={ id } letter={ letter } />)
+              ({ id, letter, selected }) => (
+                <LetterBox
+                  key={ id }
+                  id={ id.toString() }
+                  letter={ letter }
+                  selected={ selected }
+                  onLetterSelected={ onLetterSelected }
+                />
+              )
             )
           )
         }
@@ -21,6 +29,7 @@ export const LetterMatrix = ({ matrix }) => {
 }
 
 LetterMatrix.propTypes = {
-  matrix: PropTypes.array.isRequired
+  matrix: PropTypes.array.isRequired,
+  onLetterSelected: PropTypes.func.isRequired
 }
  
