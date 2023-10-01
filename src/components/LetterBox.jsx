@@ -4,7 +4,7 @@ export const LetterBox = ({ letter, id, selected = false, onLetterSelected }) =>
 
   return (
     <span
-      className={`flex justify-center text-5xl p-4 border border-slate-300 bg-slate-200 w-16 h-24 cursor-pointer ${ selected ? 'ring-2 ring-red-500 ring-inset' : '' }` }
+      className={`flex justify-center text-5xl p-4 border border-slate-300 bg-slate-200 w-24 h-24 cursor-pointer ${ selected ? 'ring-2 ring-red-500 ring-inset bg-red-100 text-red-500' : '' }` }
       aria-label={ id }
       onClick={ onLetterSelected }
     >

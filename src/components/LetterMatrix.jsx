@@ -5,7 +5,7 @@ export const LetterMatrix = ({ matrix, onLetterSelected }) => {
 
   return (
     <div className="mt-10 flex justify-center">
-      <div className="w-96">
+      <div className="w-[40rem]">
         <div className="flex flex-wrap">
         {
         matrix.map(        
