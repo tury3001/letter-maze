@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { LetterBox } from './LetterBox';
 
-export const LetterMatrix = ({ matrix, onLetterSelected }) => {  
+export const LetterMatrix = ({ matrix, onLetterSelected }) => {
 
   return (
     <div className="mt-10 flex justify-center">
-      <div className="w-[40rem]">
+      <div className="w-[36rem]">
         <div className="flex flex-wrap">
         {
         matrix.map(        
