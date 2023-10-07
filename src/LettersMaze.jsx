@@ -10,7 +10,13 @@ export const LettersMaze = () => {
   const [clearAction, setClearAction] = useState(0);
 
   const onSubmitGuess = (event) => {
-    event.preventDefault();    
+    event.preventDefault();
+
+    if (wordsToGuess.indexOf(guessWord.toLowerCase()) !== -1) {
+      console.log('acierto!'); 
+    } else {
+      console.log('Nop!');
+    }
   }
 
   const onClearSelections = () => {
@@ -38,16 +44,16 @@ export const LettersMaze = () => {
         <div>
           <div className="flex flex-col mt-10 container ml-10">
             <div className="text-white mt-4 uppercase text-xs">1 de 9 letras</div>
-            <WordGuess word={ wordsToGuess[9][0] }></WordGuess>
+            <WordGuess word={ wordsToGuess[0] }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">1 de 8 letras</div>
-            <WordGuess word={ wordsToGuess[8][0] }></WordGuess>
+            <WordGuess word={ wordsToGuess[1] }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">2 de 7 letras</div>
-            <WordGuess word={ wordsToGuess[7][0] }></WordGuess>
-            <WordGuess word={ wordsToGuess[7][1] }></WordGuess>
+            <WordGuess word={ wordsToGuess[2] }></WordGuess>
+            <WordGuess word={ wordsToGuess[3] }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">3 de 6 letras</div>
-            <WordGuess word={ wordsToGuess[6][0] }></WordGuess>
-            <WordGuess word={ wordsToGuess[6][1] }></WordGuess>
-            <WordGuess word={ wordsToGuess[6][2] }></WordGuess>
+            <WordGuess word={ wordsToGuess[4] }></WordGuess>
+            <WordGuess word={ wordsToGuess[5] }></WordGuess>
+            <WordGuess word={ wordsToGuess[6] }></WordGuess>
           </div>
         </div>
       </div>

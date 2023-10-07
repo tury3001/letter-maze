@@ -41,9 +41,4 @@ export const matrix = [
   ],
 ];
 
-export const wordsToGuess = {
-  9: [ 'asteroide' ],
-  8: [ 'masacote' ],
-  7: [ 'mandril', 'pileton' ],
-  6: [ 'triple', 'criada', 'triada' ]
-}
+export const wordsToGuess = [ 'asteroide', 'masacote', 'mandril', 'pileton', 'triple', 'criada', 'triada'];
