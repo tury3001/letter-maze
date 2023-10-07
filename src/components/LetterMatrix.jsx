@@ -6,22 +6,38 @@ export const LetterMatrix = ({ matrix, onLetterAdd, clearAction }) => {
 
   const [maze, setMaze] = useState(matrix);
   const [word, setWord] = useState('');
+  const [lastPosition, setLastPosition] = useState();
 
-  function onLetterSelected(event) {
+  function isAdyacentToLastPosition(x, y) {
+    return lastPosition && Math.abs(x - lastPosition.x) <= 1 && Math.abs(y - lastPosition.y) <= 1;
+  }
+
+  const isNotSelected = (x, y) => {
+    return maze[x-1][y-1].selected === false;
+  }
+
+  const onLetterSelected = (event) => {
 
     if (word.length <= 8) {
       const position = event.currentTarget.getAttribute('aria-label');
-      const updatedMaze = maze.map(
-        row => row.map(
-          letter => letter.id == position ? { ...letter, selected: !letter.selected } : letter
-        )
-      );
 
-      const newLetter = event.currentTarget.innerHTML;
+      const x = parseInt(position / 10);
+      const y = position % 10;
 
-      setMaze(updatedMaze);
-      setWord( (word) => word + newLetter);
-      onLetterAdd( (word) => word + newLetter);
+      if (!lastPosition || (isAdyacentToLastPosition(x, y) && isNotSelected(x, y))) {
+        const updatedMaze = maze.map(
+          row => row.map(
+            letter => letter.id == position ? { ...letter, selected: true } : letter
+          )
+        );
+  
+        const newLetter = event.currentTarget.innerHTML;
+  
+        setMaze(updatedMaze);
+        setWord( (word) => word + newLetter);
+        setLastPosition({ x, y });
+        onLetterAdd( (word) => word + newLetter);        
+      }            
     }
   }
 
@@ -34,6 +50,7 @@ export const LetterMatrix = ({ matrix, onLetterAdd, clearAction }) => {
     );
     setMaze(updatedMaze);
     setWord( () => '');
+    setLastPosition(null);
 
   }, [clearAction]);
 
