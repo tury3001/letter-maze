@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { LetterSequence } from './components/LetterSequence'
 import { LetterMatrix } from './components/LetterMatrix';
-import { matrix } from './data/sampleData';
+import { matrix, wordsToGuess } from './data/sampleData';
 import { WordGuess } from './components/WordGuess';
 
 export const LettersMaze = () => {
@@ -38,16 +38,16 @@ export const LettersMaze = () => {
         <div>
           <div className="flex flex-col mt-10 container ml-10">
             <div className="text-white mt-4 uppercase text-xs">1 de 9 letras</div>
-            <WordGuess word="asteroide"></WordGuess>
+            <WordGuess word={ wordsToGuess[9][0] }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">1 de 8 letras</div>
-            <WordGuess word="masacote"></WordGuess>
+            <WordGuess word={ wordsToGuess[8][0] }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">2 de 7 letras</div>
-            <WordGuess word="mandril"></WordGuess>
-            <WordGuess word="clavija"></WordGuess>
+            <WordGuess word={ wordsToGuess[7][0] }></WordGuess>
+            <WordGuess word={ wordsToGuess[7][1] }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">3 de 6 letras</div>
-            <WordGuess word="pureza"></WordGuess>
-            <WordGuess word="utopia"></WordGuess>
-            <WordGuess word="camara"></WordGuess>
+            <WordGuess word={ wordsToGuess[6][0] }></WordGuess>
+            <WordGuess word={ wordsToGuess[6][1] }></WordGuess>
+            <WordGuess word={ wordsToGuess[6][2] }></WordGuess>
           </div>
         </div>
       </div>
