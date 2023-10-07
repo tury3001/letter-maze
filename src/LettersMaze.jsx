@@ -10,10 +10,11 @@ export const LettersMaze = () => {
   const [clearAction, setClearAction] = useState(0);
 
   const onSubmitGuess = (event) => {
-    event.preventDefault();
+    event.preventDefault();    
   }
 
   const onClearSelections = () => {
+    setGuessWord('');
     setClearAction((trigger) => trigger + 1);
   }
 
@@ -51,8 +52,18 @@ export const LettersMaze = () => {
         </div>
       </div>
       <div className="mt-10 flex justify-center">
-        <button className="btn bg-green-600 text-white rounded px-3 py-2 mr-2" onClick={ onSubmitGuess }>Enviar</button>
-        <button className="btn bg-red-600 text-white rounded px-3 py-2" onClick={ onClearSelections }>Limpiar</button>
+        <button
+          className="btn bg-green-600 text-white rounded px-3 py-2 mr-2 disabled:opacity-40"
+          onClick={ onSubmitGuess }
+          disabled={ guessWord.length < 1 }
+          >Enviar
+          </button>
+        <button
+          className="btn bg-red-600 text-white rounded px-3 py-2 disabled:opacity-40"
+          disabled={ guessWord.length < 1 }
+          onClick={ onClearSelections }
+          >Limpiar
+          </button>
       </div>
     </div>
   )
