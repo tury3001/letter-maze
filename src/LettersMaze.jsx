@@ -3,11 +3,13 @@ import { LetterSequence } from './components/LetterSequence'
 import { LetterMatrix } from './components/LetterMatrix';
 import { matrix, wordsData } from './data/sampleData';
 import { WordGuess } from './components/WordGuess';
+import { Message } from './components/Message';
 
 export const LettersMaze = () => {
   
   const [guessWord, setGuessWord] = useState('');
   const [clearAction, setClearAction] = useState(0);
+  const [attempt, setAttempt] = useState({ q: 0, correct: false });
   const [wordsToGuess, setWordsToGuess] = useState(wordsData);
 
   const onSubmitGuess = (event) => {
@@ -15,10 +17,13 @@ export const LettersMaze = () => {
 
     if (wordsToGuess.find( wtg => wtg.word === guessWord.toLowerCase())) {
       setGuessWord('');
+      setAttempt( (attempt) => ({ q: attempt.q + 1, correct: true }));
       setClearAction((trigger) => trigger + 1);
       setWordsToGuess( words => words.map( w => w.word === guessWord.toLowerCase() ? { ...w, guessed: true  } : w));
-    } else {
-      console.log('Nop!');
+    } else {      
+      setAttempt( (attempt) => ({ q: attempt.q + 1, correct: false }));
+      setClearAction((trigger) => trigger + 1);
+      setGuessWord('');
     }
   }
 
@@ -32,11 +37,15 @@ export const LettersMaze = () => {
       <h1 className="text-3xl text-white mt-5">Letters Maze</h1>
       <div className="flex">
         <div>
-          <LetterMatrix
-            matrix={ matrix }
-            onLetterAdd={ setGuessWord }
-            clearAction={ clearAction }
-          />
+          <div className="relative">
+            <Message attempt={ attempt }></Message>
+            <LetterMatrix
+              matrix={ matrix }
+              onLetterAdd={ setGuessWord }
+              clearAction={ clearAction }
+            />            
+          </div>
+          
           <div className="mt-10 flex justify-center">
             <LetterSequence
               clearAction={ clearAction }
