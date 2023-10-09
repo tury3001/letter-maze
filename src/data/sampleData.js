@@ -41,4 +41,12 @@ export const matrix = [
   ],
 ];
 
-export const wordsToGuess = [ 'asteroide', 'masacote', 'mandril', 'pileton', 'triple', 'criada', 'triada'];
+export const wordsData = [
+  { word: 'asteroide', guessed: false },
+  { word: 'masacote', guessed: false },
+  { word: 'mandril', guessed: false },
+  { word: 'pileton', guessed: false },
+  { word: 'triple', guessed: false },
+  { word: 'criada', guessed: false },
+  { word: 'triada', guessed: false }
+]

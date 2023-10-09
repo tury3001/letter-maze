@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import { LetterSequence } from './components/LetterSequence'
 import { LetterMatrix } from './components/LetterMatrix';
-import { matrix, wordsToGuess } from './data/sampleData';
+import { matrix, wordsData } from './data/sampleData';
 import { WordGuess } from './components/WordGuess';
 
 export const LettersMaze = () => {
   
   const [guessWord, setGuessWord] = useState('');
   const [clearAction, setClearAction] = useState(0);
+  const [wordsToGuess, setWordsToGuess] = useState(wordsData);
 
   const onSubmitGuess = (event) => {
     event.preventDefault();
 
-    if (wordsToGuess.indexOf(guessWord.toLowerCase()) !== -1) {
-      console.log('acierto!'); 
+    if (wordsToGuess.find( wtg => wtg.word === guessWord.toLowerCase())) {
+      setGuessWord('');
+      setClearAction((trigger) => trigger + 1);
+      setWordsToGuess( words => words.map( w => w.word === guessWord.toLowerCase() ? { ...w, guessed: true  } : w));
     } else {
       console.log('Nop!');
     }
@@ -44,16 +47,16 @@ export const LettersMaze = () => {
         <div>
           <div className="flex flex-col mt-10 container ml-10">
             <div className="text-white mt-4 uppercase text-xs">1 de 9 letras</div>
-            <WordGuess word={ wordsToGuess[0] }></WordGuess>
+            <WordGuess word={ wordsToGuess[0].word } guessed={ wordsToGuess[0].guessed }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">1 de 8 letras</div>
-            <WordGuess word={ wordsToGuess[1] }></WordGuess>
+            <WordGuess word={ wordsToGuess[1].word } guessed={ wordsToGuess[1].guessed }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">2 de 7 letras</div>
-            <WordGuess word={ wordsToGuess[2] }></WordGuess>
-            <WordGuess word={ wordsToGuess[3] }></WordGuess>
+            <WordGuess word={ wordsToGuess[2].word } guessed={ wordsToGuess[2].guessed }></WordGuess>
+            <WordGuess word={ wordsToGuess[3].word } guessed={ wordsToGuess[3].guessed }></WordGuess>
             <div className="text-white mt-4 uppercase text-xs">3 de 6 letras</div>
-            <WordGuess word={ wordsToGuess[4] }></WordGuess>
-            <WordGuess word={ wordsToGuess[5] }></WordGuess>
-            <WordGuess word={ wordsToGuess[6] }></WordGuess>
+            <WordGuess word={ wordsToGuess[4].word } guessed={ wordsToGuess[4].guessed }></WordGuess>
+            <WordGuess word={ wordsToGuess[5].word } guessed={ wordsToGuess[5].guessed }></WordGuess>
+            <WordGuess word={ wordsToGuess[6].word } guessed={ wordsToGuess[6].guessed }></WordGuess>
           </div>
         </div>
       </div>
