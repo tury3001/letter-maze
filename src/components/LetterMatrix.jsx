@@ -9,7 +9,10 @@ export const LetterMatrix = ({ matrix, onLetterAdd, clearAction }) => {
   const [lastPosition, setLastPosition] = useState();
 
   function isAdyacentToLastPosition(x, y) {
-    return lastPosition && Math.abs(x - lastPosition.x) <= 1 && Math.abs(y - lastPosition.y) <= 1;
+    const dx = Math.abs(x - lastPosition.x);
+    const dy = Math.abs(y - lastPosition.y);
+    return lastPosition &&  dx <= 1 && dy <= 1 && !(dx === 1 && dy === 1)
+    ;
   }
 
   const isNotSelected = (x, y) => {
