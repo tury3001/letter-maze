@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { FaQuestion } from "react-icons/fa";
+import { FaQuestion, FaCheck } from "react-icons/fa";
 
 export const WordGuess = ({ word, guessed = false }) => {
 
@@ -22,10 +22,18 @@ export const WordGuess = ({ word, guessed = false }) => {
     }
   }
 
+  const getIcon = () => {
+    if (!guessed) {
+      return (<FaQuestion className="mt-1 mr-3 text-white" />);
+    } else {
+      return (<FaCheck className="mt-1 mr-3 text-green-500" />);
+    }
+  }
+
   return (
     <>
       <div className="flex mt-2">
-          <FaQuestion className="mt-1 mr-3 text-white" />
+          { getIcon() }
           { getWord() }
       </div>
     </>
