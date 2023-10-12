@@ -6,10 +6,6 @@ export const LetterSequence = ({ clearAction, guessWord }) => {
   
   const [ sequence, setSequence ] = useState('');
 
-  const onLetterAdded = (letter) => {
-    setSequence( (sequence) => sequence + letter);
-  }
-
   useEffect(() => {
     setSequence('');
   }, [clearAction]);
