@@ -1,21 +1,28 @@
 import { PropTypes } from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { useOnUpdate } from '../hooks/useOnUpdate';
 
 export const Message = ({ message }) => {
 
+  
   const [ messageDisplay, setMessageDisplay ] = useState(false);
   
-
-  useEffect(() => {
+  useOnUpdate(() => {
     showMessage();
-  }, [message]);
+  }, [message])
+  
+
 
   const showMessage = () => {
-    setMessageDisplay(true);
-    setTimeout(() => {
-      setMessageDisplay(false);
-    }, 1000)
+    if (message.interval !== undefined) {
+      setMessageDisplay(true);
+      setTimeout(() => {
+        setMessageDisplay(false);
+      }, message.interval)
+    } else {
+      setMessageDisplay(true);
+    }
   }
 
   const getMessageStyle = () => {

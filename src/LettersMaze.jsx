@@ -17,26 +17,27 @@ export const LettersMaze = () => {
     event.preventDefault();
 
     const wordToFind = wordsToGuess.find( wtg => wtg.word === guessWord.toLowerCase());
-
-    console.log(wordToFind);
     
     setGuessWord('');
     setClearAction((trigger) => trigger + 1);
 
     if (wordToFind && wordToFind.guessed === false) {      
-      setMessage( (attempt) => ({ q: attempt.q + 1, correct: true, text: 'Palabra correcta' }));      
+      setMessage( (attempt) => ({ q: attempt.q + 1, correct: true, text: 'Palabra correcta', interval: 1000 }));      
       setWordsToGuess( words => words.map( w => w.word === guessWord.toLowerCase() ? { ...w, guessed: true  } : w));
       checkGameOver();
     } else if (wordToFind && wordToFind.guessed === true) {      
-      setMessage( (attempt) => ({ q: attempt.q + 1, correct: false, text: 'Palabra ya encontrada' }));
+      setMessage( (attempt) => ({ q: attempt.q + 1, correct: false, text: 'Palabra ya encontrada', interval: 1000 }));
     } else {
-      setMessage( (attempt) => ({ q: attempt.q + 1, correct: false, text: 'Palabra incorrecta' }));
+      setMessage( (attempt) => ({ q: attempt.q + 1, correct: false, text: 'Palabra incorrecta', interval: 1000  }));
     }
   }
 
   const checkGameOver = () => {
-    if (wordsToGuess.filter( word => word.guessed === false).length === 1)
+    if (wordsToGuess.filter( word => word.guessed === false).length === 1) {
       setGameOver(true);
+      setMessage( (attempt) => ({ q: attempt.q + 1, correct: true, text: '¡Has ganado!' }));
+
+    }
   }
 
   const onClearSelections = () => {
