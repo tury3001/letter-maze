@@ -9,23 +9,28 @@ export const LettersMaze = () => {
   
   const [guessWord, setGuessWord] = useState('');
   const [clearAction, setClearAction] = useState(0);
-  const [attempt, setAttempt] = useState({ q: 0, correct: false });
+  const [message, setMessage] = useState({ q: 0, correct: false, text: '' });
   const [wordsToGuess, setWordsToGuess] = useState(wordsData);
   const [gameOver, setGameOver] = useState(true);
 
   const onSubmitGuess = (event) => {
     event.preventDefault();
 
-    if (wordsToGuess.find( wtg => wtg.word === guessWord.toLowerCase())) {
-      setGuessWord('');
-      setAttempt( (attempt) => ({ q: attempt.q + 1, correct: true }));
-      setClearAction((trigger) => trigger + 1);
+    const wordToFind = wordsToGuess.find( wtg => wtg.word === guessWord.toLowerCase());
+
+    console.log(wordToFind);
+    
+    setGuessWord('');
+    setClearAction((trigger) => trigger + 1);
+
+    if (wordToFind && wordToFind.guessed === false) {      
+      setMessage( (attempt) => ({ q: attempt.q + 1, correct: true, text: 'Palabra correcta' }));      
       setWordsToGuess( words => words.map( w => w.word === guessWord.toLowerCase() ? { ...w, guessed: true  } : w));
       checkGameOver();
-    } else {      
-      setAttempt( (attempt) => ({ q: attempt.q + 1, correct: false }));
-      setClearAction((trigger) => trigger + 1);
-      setGuessWord('');
+    } else if (wordToFind && wordToFind.guessed === true) {      
+      setMessage( (attempt) => ({ q: attempt.q + 1, correct: false, text: 'Palabra ya encontrada' }));
+    } else {
+      setMessage( (attempt) => ({ q: attempt.q + 1, correct: false, text: 'Palabra incorrecta' }));
     }
   }
 
@@ -50,7 +55,7 @@ export const LettersMaze = () => {
         <div className="flex justify-center">
           <div className="ml-10 mt-3">
             <div className="relative">
-              <Message attempt={ attempt }></Message>
+              <Message message={ message }></Message>
               <LetterMatrix
                 matrix={ matrix }
                 onLetterAdd={ setGuessWord }
