@@ -10,7 +10,7 @@ Every letter in a word has to be adjacent to the next. Letters in diagonal can't
 
 Install libraries
 
-`yarn`
+Run `yarn`
 
 ## Run development environment
 
