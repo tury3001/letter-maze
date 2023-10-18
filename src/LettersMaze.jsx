@@ -11,7 +11,7 @@ export const LettersMaze = () => {
   const [clearAction, setClearAction] = useState(0);
   const [message, setMessage] = useState({ q: 0, correct: false, text: '' });
   const [wordsToGuess, setWordsToGuess] = useState(wordsData);
-  const [gameOver, setGameOver] = useState(true);
+  const [gameOver, setGameOver] = useState(false);
 
   const onSubmitGuess = (event) => {
     event.preventDefault();
@@ -36,7 +36,6 @@ export const LettersMaze = () => {
     if (wordsToGuess.filter( word => word.guessed === false).length === 1) {
       setGameOver(true);
       setMessage( (attempt) => ({ q: attempt.q + 1, correct: true, text: '¡Has ganado!' }));
-
     }
   }
 
@@ -61,6 +60,7 @@ export const LettersMaze = () => {
                 matrix={ matrix }
                 onLetterAdd={ setGuessWord }
                 clearAction={ clearAction }
+                disabled={ gameOver }
               />            
             </div>
             
@@ -91,12 +91,12 @@ export const LettersMaze = () => {
           <button
             className="btn bg-emerald-600 text-white rounded-full px-8 py-2 mr-2 disabled:opacity-40 uppercase"
             onClick={ onSubmitGuess }
-            disabled={ guessWord.length < 1 }
+            disabled={ gameOver || guessWord.length < 1 }
             >Enviar
             </button>
           <button
             className="btn bg-red-500 text-white rounded-full px-8 py-2 disabled:opacity-40 uppercase"
-            disabled={ guessWord.length < 1 }
+            disabled={ gameOver || guessWord.length < 1 }
             onClick={ onClearSelections }
             >Limpiar
             </button>
