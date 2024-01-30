@@ -1,8 +1,17 @@
-# React + Vite
+# Letter Maze
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What's Letter Maze
 
-Currently, two official plugins are available:
+Letter Maze is a clone of Letras, a game of Diario Clarin from Argentina.
+It's a puzzle of letters in which the player has to find a set of words.
+Every letter in a word has to be adjacent to the next. Letters in diagonal can't be connected.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+
+Install libraries
+
+Run `yarn`
+
+## Run development environment
+
+Run `yarn dev`

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { LetterBox } from './LetterBox';
 import { useEffect, useState } from 'react';
 
-export const LetterMatrix = ({ matrix, onLetterAdd, clearAction }) => {
+export const LetterMatrix = ({ matrix, onLetterAdd, clearAction, disabled = false }) => {
 
   const [maze, setMaze] = useState(matrix);
   const [word, setWord] = useState('');
@@ -21,7 +21,7 @@ export const LetterMatrix = ({ matrix, onLetterAdd, clearAction }) => {
 
   const onLetterSelected = (event) => {
 
-    if (word.length <= 8) {
+    if (!disabled && word.length <= 8) {
       const position = event.currentTarget.getAttribute('aria-label');
 
       const x = parseInt(position / 10);
@@ -85,6 +85,7 @@ export const LetterMatrix = ({ matrix, onLetterAdd, clearAction }) => {
 LetterMatrix.propTypes = {
   matrix: PropTypes.array.isRequired,
   onLetterAdd: PropTypes.func.isRequired,
-  clearAction: PropTypes.number.isRequired
+  clearAction: PropTypes.number.isRequired,
+  disabled: PropTypes.bool.isRequired
 }
  
